@@ -82,6 +82,7 @@
 #include "options.h"
 #include "retrieve.h"
 #include "types.h"
+#include "util.h"
 
 /// Snapshotting system.
 u3e_pool u3e_Pool;
@@ -1074,7 +1075,7 @@ u3e_save(void)
     return;
   }
 
-  // u3a_print_memory(stderr, "sync: save", 4096 * pat_u->con_u->pgs_w);
+  // c3_print_mem_w(stderr, 4096 * pat_u->con_u->pgs_w, "sync: save");
 
   _ce_patch_sync(pat_u);
 
@@ -1190,8 +1191,7 @@ u3e_live(c3_o nuu_o, c3_c* dir_c)
         nuu_o = c3y;
       }
       else {
-        u3a_print_memory(stderr, "live: loaded",
-                         (u3P.nor_u.pgs_w + u3P.sou_u.pgs_w) << u3a_page);
+        c3_print_mem_w(stderr, (u3P.nor_u.pgs_w + u3P.sou_u.pgs_w) << u3a_page, "sync: save");
       }
     }
   }
