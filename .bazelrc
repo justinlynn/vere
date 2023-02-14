@@ -42,5 +42,7 @@ build --host_copt='-DU3_MEMORY_DEBUG'
 build:dbg --copt='-O0'
 build:dbg --copt='-g3'
 
+build:test --per_file_copt='//pkg/pma:.*\.c@-DPMA_TEST'
+
 # Any personal configuration should go in .user.bazelrc.
 try-import %workspace%/.user.bazelrc
