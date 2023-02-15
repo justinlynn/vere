@@ -4,7 +4,12 @@
 #define U3_MANAGE_H
 
 #include "c3.h"
+#include "pma.h"
 #include "types.h"
+
+      /* Persistent memory arena.
+      */
+      extern pma_t* u3_pma;
 
     /** System management.
     **/
@@ -42,7 +47,7 @@
       /* u3m_init(): start the environment.
       */
         void
-        u3m_init(size_t len_i);
+        u3m_init(size_t len_i, c3_c* heap_c, c3_c* stack_c);
 
       /* u3m_pave(): instantiate or activate image.
       */
