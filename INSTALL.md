@@ -68,10 +68,10 @@ Note that you cannot change the optimization level for third party
 dependencies--those targets specified in `bazel/third_party`--from the command
 line.
 
-You can turn on CPU and memory debugging by defining `U3_CPU_DEBUG` and
-`U3_MEMORY_DEBUG`, respectively:
+You can turn on CPU and memory debugging by specifying the `cpu_dbg` and/or the
+`mem_dbg` build config.
 ```console
-bazel build --copt='-DU3_CPU_DEBUG' --copt='-DU3_MEMORY_DEBUG' :urbit
+bazel build --config=cpu_dbg --config=mem_dbg :urbit
 ```
 Note that defining these two debug symbols will produce ships that are
 incompatible with binaries without these two debug symbols defined.
