@@ -2,6 +2,8 @@
 
 #include "allocate.h"
 
+#include <time.h>
+
 #include "hashtable.h"
 #include "log.h"
 #include "manage.h"
@@ -2717,6 +2719,8 @@ u3a_string(u3_atom a)
 void
 u3a_loom_sane()
 {
+  struct timespec t0, t1;
+  timespec_get(&t0, TIME_UTC);
   /*
     Only checking validity of freelists for now. Other checks could be added,
     e.g. noun HAMT traversal, boxwise traversal of loom validating `siz_w`s,
@@ -2740,4 +2744,6 @@ u3a_loom_sane()
       else if (_box_slot(this_u->box_u.siz_w) != i_w) c3_assert(!"loom: corrupt");
     }
   }
+  timespec_get(&t1, TIME_UTC);
+  fprintf(stderr, "sane: u3a_loom_sane: %ld\r\n", t1.tv_nsec - t0.tv_nsec);
 }
