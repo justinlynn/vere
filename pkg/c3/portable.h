@@ -94,6 +94,8 @@
 #     ifdef __LP64__
 #       ifdef U3_CPU_aarch64
 #         define U3_OS_ARCH "linux-aarch64"
+#       elif defined(U3_CPU_powerpc64le)
+#         define U3_OS_ARCH "linux-powerpc64le"
 #       else
 #         define U3_OS_ARCH "linux-x86_64"
 #       endif

@@ -22,6 +22,7 @@ cc_library(
         "U3_OS_ENDIAN_little=1",
         "U3_OS_PROF=1",
     ] + select({
+        "//bazel/toolchain/platforms/cpu:powerpc64le": ["U3_CPU_powerpc64le=1"],
         "@platforms//cpu:aarch64": ["U3_CPU_aarch64=1"],
         "//conditions:default": [],
     }) + select({

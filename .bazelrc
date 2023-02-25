@@ -35,6 +35,7 @@ build --host_copt='-O3'
 # fake ship tests.
 build --host_copt='-DU3_CPU_DEBUG'
 build --host_copt='-DU3_MEMORY_DEBUG'
+build --host_copt='-DU3_SNAPSHOT_VALIDATION'
 build --host_copt='-DC3DBG'
 
 # Enable maximum debug info and disable optimizations for debug config. It's
