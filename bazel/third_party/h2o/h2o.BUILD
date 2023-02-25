@@ -6,7 +6,7 @@ CC_WARNING_FLAGS = [
     "-Wall",
     "-Wno-unused-value",
     "-Wno-unused-function",
-    "-Wno-nullability-completeness",
+#    "-Wno-nullability-completeness",
     "-Wno-expansion-to-defined",
     "-Werror=implicit-function-declaration",
     "-Werror=incompatible-pointer-types",
@@ -47,6 +47,7 @@ cc_library(
     linkstatic = True,
     local_defines = select({
         "@platforms//cpu:aarch64": ["URBIT_RUNTIME_CPU_AARCH64"],
+        "@//bazel/toolchain/platforms/cpu:powerpc64le": ["NO_WARN_X86_INTRINSICS"],
         "//conditions:default": [],
     }),
     visibility = ["//visibility:private"],
@@ -105,6 +106,7 @@ cc_library(
     linkstatic = True,
     local_defines = select({
         "@platforms//cpu:aarch64": ["URBIT_RUNTIME_CPU_AARCH64"],
+        "@//bazel/toolchain/platforms/cpu:powerpc64le": ["NO_WARN_X86_INTRINSICS"],
         "//conditions:default": [],
     }),
     visibility = ["//visibility:private"],
@@ -136,6 +138,7 @@ cc_library(
     linkstatic = True,
     local_defines = select({
         "@platforms//cpu:aarch64": ["URBIT_RUNTIME_CPU_AARCH64"],
+        "@//bazel/toolchain/platforms/cpu:powerpc64le": ["NO_WARN_X86_INTRINSICS"],
         "//conditions:default": [],
     }),
     visibility = ["//visibility:private"],

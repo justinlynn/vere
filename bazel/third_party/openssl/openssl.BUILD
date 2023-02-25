@@ -27,6 +27,10 @@ configure_make(
             # an issue.
             "--cross-compile-prefix=",
         ],
+#        "@//:linux_powerpc64le": [
+#          "linux-powerpc64le",
+#          "--cross-compile-prefix=",
+#        ],
         "//conditions:default": [],
     }),
     copts = ["-O3"],

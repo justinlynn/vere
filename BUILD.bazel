@@ -5,6 +5,14 @@ load("//bazel:common_settings.bzl", "string_flag")
 #
 
 config_setting(
+    name = "linux_powerpc64le",
+    constraint_values = [
+        "@platforms//os:linux",
+        "//bazel/toolchain/platforms/cpu:powerpc64le",
+    ],
+)
+
+config_setting(
     name = "linux_aarch64",
     constraint_values = [
         "@platforms//os:linux",
@@ -77,6 +85,23 @@ platform(
     constraint_values = [
         "@platforms//os:linux",
         "@platforms//cpu:x86_64",
+    ],
+)
+
+platform(
+    name = "linux-powerpc64le",
+    constraint_values = [
+      "@platforms//os:linux",
+      "//bazel/toolchain/platforms/cpu:powerpc64le",
+    ],
+)
+
+platform(
+    name = "gcc-linux-powerpc64le",
+    constraint_values = [
+        ":gcc",
+        "@platforms//os:linux",
+        "//bazel/toolchain/platforms/cpu:powerpc64le",
     ],
 )
 

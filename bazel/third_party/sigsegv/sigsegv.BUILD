@@ -11,6 +11,9 @@ configure_make(
         "@platforms//os:macos": ["--jobs=`sysctl -n hw.logicalcpu`"],
         "//conditions:default": ["--jobs=`nproc`"],
     }),
+    autogen = True,
+    autogen_options = ["--skip-gnulib"],
+    configure_in_place = True,
     configure_options = [
         "--disable-shared",
         "--enable-static",
@@ -22,6 +25,7 @@ configure_make(
     }) + select({
         "@//:linux_aarch64": ["--host=aarch64-linux-musl"],
         "@//:linux_x86_64": ["--host=x86_64-linux-musl"],
+        "@//:linux_powerpc64le": ["--host=powerpc64le-linux-musl"],
         "//conditions:default": [],
     }),
     copts = ["-O3"],

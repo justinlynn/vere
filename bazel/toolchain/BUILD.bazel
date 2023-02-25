@@ -150,6 +150,60 @@ toolchain(
 )
 
 #
+# gcc-linux-powerpc64le
+#
+
+# Toolchain identifier.
+_powerpc64le_gcc = "toolchain-gcc-linux-powerpc64le"
+
+cc_toolchain_config(
+    name = "gcc-linux-powerpc64le-config",
+    ar = "{}/powerpc64le-linux-musl/bin/powerpc64le-linux-musl-ar".format(_install_prefix),
+    cc = "{}/powerpc64le-linux-musl/bin/powerpc64le-linux-musl-gcc".format(_install_prefix),
+    cc_flags = [
+        "-static",
+        "--sysroot={}/powerpc64le-linux-musl".format(_install_prefix),
+    ],
+    compiler = "powerpc64le-linux-musl-gcc",
+    compiler_version = "//:gcc_version",
+    ld = "{}/powerpc64le-linux-musl/bin/powerpc64le-linux-musl-ld".format(_install_prefix),
+    ld_flags = ["--sysroot={}/powerpc64le-linux-musl".format(_install_prefix)],
+    sys_includes = [
+        "{}/powerpc64le-linux-musl/powerpc64le-linux-musl/include".format(_install_prefix),
+        "{}/powerpc64le-linux-musl/lib/gcc/powerpc64le-linux-musl/{{compiler_version}}/include".format(_install_prefix),
+    ],
+    target_cpu = "powerpc64le",
+    toolchain_identifier = _powerpc64le_gcc,
+)
+
+cc_toolchain(
+    name = "gcc-linux-powerpc64le",
+    all_files = ":empty",
+    compiler_files = ":empty",
+    dwp_files = ":empty",
+    linker_files = ":empty",
+    objcopy_files = ":empty",
+    strip_files = ":empty",
+    supports_param_files = 0,
+    toolchain_config = ":gcc-linux-powerpc64le-config",
+    toolchain_identifier = _powerpc64le_gcc,
+)
+
+toolchain(
+    name = "gcc-linux-powerpc64le-toolchain",
+    exec_compatible_with = [
+        "@platforms//os:linux",
+        "//bazel/toolchain/platforms/cpu:powerpc64le",
+    ],
+    target_compatible_with = [
+        "@platforms//os:linux",
+        "//bazel/toolchain/platforms/cpu:powerpc64le",
+    ],
+    toolchain = ":gcc-linux-powerpc64le",
+    toolchain_type = ":toolchain_type",
+)
+
+#
 # clang-macos-aarch64
 #
 
@@ -399,6 +453,39 @@ genrule(
 sh_binary(
     name = "x86_64-linux-musl-gcc",
     srcs = ["install-x86_64-linux-musl-gcc"],
+    exec_compatible_with = ["@platforms//os:linux"],
+    target_compatible_with = ["@platforms//os:linux"],
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "install-powerpc64le-linux-musl-gcc",
+    outs = ["install-powerpc64le-linux-musl-gcc.sh"],
+    cmd = """
+    echo 'powerpc64le_linux_musl_install={}/powerpc64le-linux-musl'                          >  $@
+    echo 'if [ ! -d $$powerpc64le_linux_musl_install ]; then'                           >> $@
+    echo '    wget -c {}'                                                          >> $@
+    echo '    tar -xf {}.tar.gz'                                                   >> $@
+    echo '    archive=musl-cross-make-{}'                                          >> $@
+    echo '    echo OUTPUT=$$powerpc64le_linux_musl_install > $$archive/config.mak'      >> $@
+    echo '    TARGET=powerpc64le-linux-musl make -s -C$$archive -j`nproc`'              >> $@
+    echo '    sudo TARGET=powerpc64le-linux-musl make -s -C$$archive -j`nproc` install' >> $@
+    echo '    sudo chown --recursive $$USER $$powerpc64le_linux_musl_install'           >> $@
+    echo 'fi'                                                                      >> $@
+    """.format(
+        _install_prefix,
+        _musl_cross_make_archive,
+        _musl_cross_make_version,
+        _musl_cross_make_version,
+    ),
+    exec_compatible_with = ["@platforms//os:linux"],
+    target_compatible_with = ["@platforms//os:linux"],
+    visibility = ["//visibility:private"],
+)
+
+sh_binary(
+    name = "powerpc64le-linux-musl-gcc",
+    srcs = ["install-powerpc64le-linux-musl-gcc"],
     exec_compatible_with = ["@platforms//os:linux"],
     target_compatible_with = ["@platforms//os:linux"],
     visibility = ["//visibility:public"],
