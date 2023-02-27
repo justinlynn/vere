@@ -844,6 +844,7 @@ _ce_image_blit(u3e_image* img_u,
   ssize_t ret_i;
   c3_w      i_w;
   c3_w    siz_w = pag_siz_i;
+  c3_w*   ptrbas_w = ptr_w;
 
   if ( -1 == lseek(img_u->fid_i, 0, SEEK_SET) ) {
     fprintf(stderr, "loom: image (%s) blit seek 0: %s\r\n",
@@ -864,11 +865,6 @@ _ce_image_blit(u3e_image* img_u,
       c3_assert(0);
     }
 
-    if ( 0 != mprotect(ptr_w, siz_w, PROT_READ) ) {
-      fprintf(stderr, "loom: live mprotect: %s\r\n", strerror(errno));
-      c3_assert(0);
-    }
-
     c3_w pag_w = u3a_outa(ptr_w) >> u3a_page;
     c3_w blk_w = pag_w >> 5;
     c3_w bit_w = pag_w & 31;
@@ -876,6 +872,12 @@ _ce_image_blit(u3e_image* img_u,
 
     ptr_w += stp_ws;
   }
+
+  if ( 0 != mprotect(ptrbas_w, (ptr_w - ptrbas_w), PROT_READ) ) {
+    fprintf(stderr, "loom: live mprotect: %s\r\n", strerror(errno));
+    c3_assert(0);
+  }
+
 }
 
 #ifdef U3_SNAPSHOT_VALIDATION
