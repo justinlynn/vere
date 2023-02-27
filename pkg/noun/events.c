@@ -873,11 +873,6 @@ _ce_image_blit(u3e_image* img_u,
     ptr_w += stp_ws;
   }
 
-  if ( 0 != mprotect(ptrbas_w, (ptr_w - ptrbas_w), PROT_READ) ) {
-    fprintf(stderr, "loom: live mprotect: %s\r\n", strerror(errno));
-    c3_assert(0);
-  }
-
 }
 
 #ifdef U3_SNAPSHOT_VALIDATION
@@ -1186,6 +1181,11 @@ u3e_live(c3_o nuu_o, c3_c* dir_c)
         _ce_image_blit(&u3P.sou_u,
                        (u3_Loom + u3C.wor_i) - pag_wiz_i,
                        -(ssize_t)pag_wiz_i);
+
+        if ( 0 != mprotect((void *)u3_Loom, u3C.wor_i << 2, PROT_READ) ) {
+          fprintf(stderr, "loom: live mprotect: %s\r\n", strerror(errno));
+          c3_assert(0);
+        }
 
         u3l_log("boot: protected loom");
       }
