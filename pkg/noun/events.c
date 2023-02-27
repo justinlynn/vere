@@ -1124,7 +1124,7 @@ u3e_live(c3_o nuu_o, c3_c* dir_c)
   {
     size_t sys_i = sysconf(_SC_PAGESIZE);
 
-    if ( sys_i % pag_siz_i ) {
+    if ( ( sys_i >= pag_siz_i ) ? ( sys_i % pag_siz_i ) : ( pag_siz_i % sys_i ) ) {
       fprintf(stderr, "loom: incompatible system page size (%zuKB)\r\n",
                       sys_i >> 10);
       exit(1);
