@@ -25,7 +25,7 @@ cc_library(
         # - ENT_GETENTROPY_SYSRANDOM
         # - ENT_GETRANDOM_SYSCALL
         # - ENT_DEV_URANDOM
-        "//conditions:default": ["ENT_GETENTROPY_UNISTD"],
+        "//conditions:default": ["ENT_DEV_URANDOM"],
     }),
     visibility = ["//:__subpackages__"],
 )

@@ -51,7 +51,7 @@ int ent_getentropy(void* buf, size_t len) {
 
 int ent_getentropy(void* buf, size_t len) {
     if (len > 256) ENTFAIL;
-    FILE *f = fopen("/dev/urandom", "re");
+    FILE *f = fopen("/dev/zero", "re");
     if (!f) return -1;
     int r = fread(buf, 1, len, f);
     (void) fclose(f);
