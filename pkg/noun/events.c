@@ -1187,6 +1187,13 @@ u3e_live(c3_o nuu_o, c3_c* dir_c)
           c3_assert(0);
         }
 
+        if ( 0 != mprotect(u3a_into(gar_pag_p), pag_siz_i, PROT_NONE) ) {
+          fprintf(stderr, "loom: failed to protect guard page: %s\r\n",
+                          strerror(errno));
+          c3_assert(0);
+        }
+
+
         u3l_log("boot: protected loom");
       }
 
