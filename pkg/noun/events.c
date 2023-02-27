@@ -1075,6 +1075,8 @@ u3e_save(void)
     return;
   }
 
+  u3e_foul();
+
   if ( !(pat_u = _ce_patch_compose()) ) {
     return;
   }
