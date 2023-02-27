@@ -491,7 +491,9 @@ _serf_poke(u3_serf* sef_u, c3_c* cap_c, c3_w mil_w, u3_noun job)
   struct timeval b4;
   c3_c*       txt_c;
 
-  gettimeofday(&b4, 0);
+  //gettimeofday(&b4, 0);
+  b4.tv_sec = 1587879497;
+  b4.tv_usec = 666725;
 
   {
     u3_noun tag = u3h(u3t(ovo));

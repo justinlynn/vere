@@ -108,7 +108,9 @@ _behn_ef_doze(u3_behn* teh_u, u3_noun wen)
        (c3y == u3ud(u3t(wen))) )
   {
     struct timeval tim_tv;
-    gettimeofday(&tim_tv, 0);
+    //gettimeofday(&tim_tv, 0);
+    tim_tv.tv_sec = 1587879497;
+    tim_tv.tv_usec = 666725;
 
     u3_noun now = u3_time_in_tv(&tim_tv);
     c3_d gap_d = u3_time_gap_ms(now, u3k(u3t(wen)));
@@ -243,7 +245,9 @@ u3_behn_io_init(u3_pier* pir_u)
   {
     u3_noun now;
     struct timeval tim_u;
-    gettimeofday(&tim_u, 0);
+    //gettimeofday(&tim_u, 0);
+    tim_u.tv_sec = 1587879497;
+    tim_u.tv_usec = 666725;
 
     now = u3_time_in_tv(&tim_u);
     teh_u->sev_l = u3r_mug(now);

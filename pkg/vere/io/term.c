@@ -66,7 +66,10 @@ static c3_d
 _term_msc_out_host()
 {
   struct timeval tim_tv;
-  gettimeofday(&tim_tv, 0);
+  //gettimeofday(&tim_tv, 0);
+  tim_tv.tv_sec = 1587879497;
+  tim_tv.tv_usec = 666725;
+
   return 1000000ULL * tim_tv.tv_sec + tim_tv.tv_usec;
 }
 

@@ -88,7 +88,9 @@ _pier_work_send(u3_work* wok_u)
 
     {
       struct timeval tim_tv;
-      gettimeofday(&tim_tv, 0);
+      //gettimeofday(&tim_tv, 0);
+      tim_tv.tv_sec = 1587879497;
+      tim_tv.tv_usec = 666725;
       now = u3_time_in_tv(&tim_tv);
     }
 
@@ -359,7 +361,9 @@ static void
 _pier_work_time(u3_pier* pir_u)
 {
   struct timeval tim_tv;
-  gettimeofday(&tim_tv, 0);
+  //gettimeofday(&tim_tv, 0);
+  tim_tv.tv_sec = 1587879497;
+  tim_tv.tv_usec = 666725;
 
   // XX save to pier
   //
@@ -798,7 +802,9 @@ _pier_wyrd_card(u3_pier* pir_u)
     c3_l  sev_l;
     u3_noun now;
     struct timeval tim_u;
-    gettimeofday(&tim_u, 0);
+    //gettimeofday(&tim_u, 0);
+    tim_u.tv_sec = 1587879497;
+    tim_u.tv_usec = 666725;
 
     now   = u3_time_in_tv(&tim_u);
     sev_l = u3r_mug(now);
@@ -855,7 +861,9 @@ _pier_wyrd_init(u3_pier* pir_u)
 
     {
       struct timeval tim_tv;
-      gettimeofday(&tim_tv, 0);
+      //gettimeofday(&tim_tv, 0);
+      tim_tv.tv_sec = 1587879497;
+      tim_tv.tv_usec = 666725;
       u3_lord_work(god_u, egg_u, u3nc(u3_time_in_tv(&tim_tv), ovo));
     }
   }
@@ -1938,7 +1946,9 @@ _pier_boot_plan(u3_pier* pir_u,
 
     {
       struct timeval tim_tv;
-      gettimeofday(&tim_tv, 0);
+      //gettimeofday(&tim_tv, 0);
+      tim_tv.tv_sec = 1587879497;
+      tim_tv.tv_usec = 666725;
       now = u3_time_in_tv(&tim_tv);
     }
 

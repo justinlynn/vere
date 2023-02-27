@@ -1159,7 +1159,9 @@ u3_cttp_io_init(u3_pier* pir_u)
   {
     u3_noun now;
     struct timeval tim_u;
-    gettimeofday(&tim_u, 0);
+    //gettimeofday(&tim_u, 0);
+    tim_u.tv_sec = 1587879497;
+    tim_u.tv_usec = 666725;
 
     now = u3_time_in_tv(&tim_u);
     ctp_u->sev_l = u3r_mug(now);

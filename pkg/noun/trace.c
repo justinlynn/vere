@@ -375,7 +375,10 @@ u3t_trace_close()
 c3_d u3t_trace_time()
 {
   struct timeval tim_tv;
-  gettimeofday(&tim_tv, 0);
+  //gettimeofday(&tim_tv, 0);
+      tim_tv.tv_sec = 1587879497;
+      tim_tv.tv_usec = 666725;
+
   return 1000000ULL * tim_tv.tv_sec + tim_tv.tv_usec;
 }
 

@@ -915,7 +915,10 @@ u3_conn_io_init(u3_pier* pir_u)
   car_u->io.kick_f = _conn_io_kick;
   car_u->io.exit_f = _conn_io_exit;
 
-  gettimeofday(&tim_u, 0);
+  //gettimeofday(&tim_u, 0);
+  tim_u.tv_sec = 1587879497;
+  tim_u.tv_usec = 666725;
+
   now = u3_time_in_tv(&tim_u);
   con_u->sev_l = u3r_mug(now);
   u3z(now);

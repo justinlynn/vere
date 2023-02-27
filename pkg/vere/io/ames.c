@@ -427,7 +427,9 @@ u3_ames_encode_lane(u3_lane lan) {
 static void
 _ames_lane_into_cache(u3p(u3h_root) lax_p, u3_noun who, u3_noun las) {
   struct timeval tim_tv;
-  gettimeofday(&tim_tv, 0);
+  //gettimeofday(&tim_tv, 0);
+  tim_tv.tv_sec = 1587879497;
+  tim_tv.tv_usec = 666725;
   u3_noun now = u3_time_in_tv(&tim_tv);
   u3_noun val = u3nc(las, now);
   u3h_put(lax_p, who, val);
@@ -442,7 +444,9 @@ _ames_lane_from_cache(u3p(u3h_root) lax_p, u3_noun who) {
 
   if ( u3_none != lac ) {
     struct timeval tim_tv;
-    gettimeofday(&tim_tv, 0);
+    //gettimeofday(&tim_tv, 0);
+    tim_tv.tv_sec = 1587879497;
+    tim_tv.tv_usec = 666725;
     u3_noun now = u3_time_in_tv(&tim_tv);
     u3_noun den = u3t(lac);
 
@@ -1590,7 +1594,9 @@ u3_ames_io_init(u3_pier* pir_u)
   {
     u3_noun now;
     struct timeval tim_u;
-    gettimeofday(&tim_u, 0);
+    //gettimeofday(&tim_u, 0);
+    tim_u.tv_sec = 1587879497;
+    tim_u.tv_usec = 666725;
 
     now = u3_time_in_tv(&tim_u);
     sam_u->sev_l = u3r_mug(now);
