@@ -62,6 +62,8 @@
     #define c3_dessert(x) do { if(!(x)) __asm__ volatile(".inst 0xd4200000"); } while (0)
   #elif defined(__arm__)
     #define c3_dessert(x) do { if(!(x)) __asm__ volatile(".inst 0xe7f001f0"); } while (0)
+  #elif defined(U3_CPU_powerpc64le)
+    #define c3_dessert(x) do { if(!(x)) __asm__ volatile(".4byte 0x7d821008"); } while (0)
   #else
     STATIC_ASSERT(0, "debugger break instruction unimplemented");
   #endif
