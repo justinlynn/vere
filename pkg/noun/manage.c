@@ -589,7 +589,7 @@ STATIC_ASSERT( ((c3_wiseof(u3v_home) * 4) == sizeof(u3v_home)),
 static void
 _find_home(void)
 {
-  c3_w ver_w = *(u3_Loom + u3C.wor_i - 1);
+  c3_w ver_w = ((u3v_home *)(u3_Loom + u3C.wor_i - c3_wiseof(u3v_home)))->ver_w;
   u3a_config_loom(ver_w);
 
   //  NB: the home road is always north
