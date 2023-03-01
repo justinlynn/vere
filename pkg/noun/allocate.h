@@ -19,9 +19,9 @@
      */
 #    define u3a_bits_max (8 * sizeof(c3_w) + u3a_vits_max)
 
-    /* u3a_page: number of bits in word-addressed page.  12 == 16K page
+    /* u3a_page: number of bits in word-addressed page.  16 == 64K page
     */
-#     define u3a_page    12ULL
+#     define u3a_page    16ULL
 
     /* u3a_pages: maximum number of pages in memory.
     */
