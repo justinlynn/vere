@@ -30,13 +30,19 @@ container_run_and_commit_layer(
         "apk add bash curl",
     ],
     docker_run_flags = ["--network=host"],
-    image = "@alpine_linux_powerpc64le//image",
+    image = select({
+      "@//:linux_x86_64": ["@alpine_linux_x86_64//image"],
+      "@//:linux_powerpc64le": ["@alpine_linux_powerpc64le//image"],
+    }),
     visibility = ["//visibility:private"],
 )
 
 container_image(
     name = "image_powerpc64le",
-    base = "@alpine_linux_powerpc64le//image",
+    base = select({
+      "@//:linux_x86_64": ["@alpine_linux_x86_64//image"],
+      "@//:linux_powerpc64le": ["@alpine_linux_powerpc64le//image"],
+    }),
     cmd = ["start-urbit"],
     directory = "/bin",
     # `/bin` is probably on the default path, but append it just to be safe.
@@ -76,9 +82,15 @@ genrule(
 )
 
 container_push(
-    name = "push_latest_powerpc64le",
+    name = select({
+      "@//:linux_x86_64": ["push_latest_x86_64"],
+      "@//:linux_powerpc64le": ["push_latest_powerpc64le"],
+    }),
     format = "Docker",
-    image = ":image_powerpc64le",
+    image = select({
+      "@//:linux_x86_64": [":image_x86_64"],
+      "@//:linux_powerpc64le": [":image_powerpc64le"],
+    }),
     registry = "docker.io",
     repository = _docker_repository,
     tag = "latest",
@@ -86,9 +98,15 @@ container_push(
 )
 
 container_push(
-    name = "push_version_powerpc64le",
+    name = select({
+      "@//:linux_x86_64": ["push_version_x86_64"],
+      "@//:linux_powerpc64le": ["push_version_powerpc64le"],
+    }),
     format = "Docker",
-    image = ":image_powerpc64le",
+    image = select({
+      "@//:linux_x86_64": [":image_x86_64"],
+      "@//:linux_powerpc64le": [":image_powerpc64le"],
+    }),
     registry = "docker.io",
     repository = _docker_repository,
     tag_file = ":version_tag",

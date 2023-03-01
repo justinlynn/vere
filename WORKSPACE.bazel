@@ -437,10 +437,19 @@ _cc_image_repos()
 load("@io_bazel_rules_docker//container:container.bzl", "container_pull")
 
 container_pull(
-    name = "alpine_linux_powerpc64le",
+    name = select({
+      "@//:linux_x86_64": ["alpine_linux_x86_64"],
+      "@//:linux_powerpc64le": ["alpine_linux_powerpc64le"],
+    }),
     timeout = 300,  # [seconds]
-    architecture = "ppc64le",
-    digest = "sha256:95f55647488fbe0195d340089acfa6a094a9ee0aa6540d98dde8f8af5092d40c",
+    architecture = select({
+      "@//:linux_x86_64": ["amd64"],
+      "@//:linux_powerpc64le": ["powerpc64le"],
+    }),
+    digest = select({
+      "@//:linux_x86_64": "sha256:93d5a28ff72d288d69b5997b8ba47396d2cbb62a72b5d87cd3351094b5d578a0",
+      "@//:linux_powerpc64le": "sha256:95f55647488fbe0195d340089acfa6a094a9ee0aa6540d98dde8f8af5092d40c",
+    }),
     registry = "docker.io",
     repository = "alpine",
 )
